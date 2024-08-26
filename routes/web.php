@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\GeminiAIController;
+use App\Http\Controllers\HistoryChatController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -12,10 +14,10 @@ Route::get('/portofolio', function () {
 });
 
 //gemini AI
-Route::get('/chatbot', function () {
-    return view('chatbot/index');
-});
-Route::post('/chatbot', [GeminiAIController::class, 'handleChat']);
+// Route::get('/history_chat', function () {
+//     return view('chatbot/index');
+// });
+// Route::post('/chatbot', [GeminiAIController::class, 'handleChat']);
 
 Auth::routes();
 
@@ -30,3 +32,10 @@ Route::prefix('search')->group(function () {
     Route::get('/', [UserController::class, 'searchUser']);
     Route::get('/{id}', [UserController::class, 'findUser']);
 });
+
+Route::resource('history_chat', HistoryChatController::class);
+Route::post('/chatbot', [HistoryChatController::class, 'store']);
+
+Route::get('biodata/{id}', [BiodataController::class, 'edit']);
+
+Route::resource('biodata', BiodataController::class);
