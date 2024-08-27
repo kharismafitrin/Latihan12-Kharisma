@@ -1,6 +1,10 @@
-<form action="{{ route('biodata.store') }}" method="post" class="p-3">
+<form action="{{ route('biodata.store') }}" method="post" enctype="multipart/form-data" class="p-3">
     @csrf
     <div class="row">
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Masukkan Gambar</label>
+            <input class="form-control" name='image' type="file" id="formFile">
+        </div>
         <div class="form-floating col-6 mb-3">
             <input type="text" name='name' class="form-control" placeholder="nama" id="floatingInput"">
                 <label class=" mx-2" for=" floatingInput">Nama Lengkap</label>

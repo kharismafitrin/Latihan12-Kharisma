@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('nik', 16);
             $table->integer('umur');
             $table->longText('alamat');
+            $table->string('image_path')->nullable();
             $table->timestamps();
         });
     }

@@ -26,5 +26,6 @@ class Biodata extends Model
         'nik',
         'umur',
         'alamat',
+        'image_path'
     ];
 }

@@ -7,6 +7,7 @@
                 <th scope="col">Nama</th>
                 <th scope="col">Umur</th>
                 <th scope="col">Alamat</th>
+                <th scope="col">Image</th>
                 <th scope="col">Aksi</th>
             </tr>
         </thead>
@@ -19,6 +20,12 @@
                     <td>{{$manusia->name}}</td>
                     <td>{{$manusia->umur}}</td>
                     <td>{{$manusia->alamat}}</td>
+                    <td>
+                        @if (isset($manusia->image_path))
+                            <img src="{{asset('storage/' . $manusia->image_path)}}" class="img-thumbnail img-fluid"
+                                alt="uploaded image">
+                        @endif
+                    </td>
                     <td>
                         <a href="{{ route('biodata.edit', $manusia->id) }}" class="btn btn-primary">Edit</a>
                         <form action="{{ route('biodata.destroy', $manusia->id) }}" method="post" style="display:inline;">

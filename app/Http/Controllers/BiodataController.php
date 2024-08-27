@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Biodata;
 use Illuminate\Http\Request;
+use Storage;
 
 class BiodataController extends Controller
 {
@@ -13,6 +14,7 @@ class BiodataController extends Controller
     public function index()
     {
         $biodata = Biodata::all();
+        // dd($biodata);
         return view("biodata.index")->with("biodata", $biodata);
     }
 
@@ -30,7 +32,27 @@ class BiodataController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        Biodata::create($request->all());
+        $image = $request->file('image');
+
+        $imagePath = null;
+        $imageUrl = null;
+
+        if ($image) {
+            $imagePath = $image->store('images', 'public');
+            if ($imagePath) {
+                $imageUrl = Storage::disk('public')->url($imagePath);
+            } else {
+                return redirect()->back()->with('error', 'Failed to upload image');
+            }
+        }
+        // Biodata::create($request->all());
+        Biodata::create([
+            'name' => $request->name,
+            'nik' => $request->nik,
+            'umur' => $request->umur,
+            'alamat' => $request->alamat,
+            'image_path' => $imagePath
+        ]);
         return redirect()->route('biodata.index');
     }
 
