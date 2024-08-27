@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Halaman Chatbot')
+
 @section('content')
 <div class="container">
     <h3 class="text-center">Chatbot</h3>

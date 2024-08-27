@@ -33,9 +33,10 @@ class BiodataController extends Controller
     {
         // dd($request->all());
         $image = $request->file('image');
+        // dd($image);
 
         $imagePath = null;
-        $imageUrl = null;
+        // $imageUrl = null;
 
         if ($image) {
             $imagePath = $image->store('images', 'public');
